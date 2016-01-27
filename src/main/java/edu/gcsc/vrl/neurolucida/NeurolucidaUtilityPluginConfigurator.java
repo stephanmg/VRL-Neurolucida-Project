@@ -24,24 +24,26 @@ import java.util.logging.Logger;
 import org.apache.commons.io.IOUtils;
 
 /**
- * @brief Neurolucida plugin configurator
+ * @brief Plugin configurator of Neurolucida Utility 
  * @author stephanmg <stephan@syntaktischer-zucker.de>
  */
-public class NeurolucidaPluginConfigurator extends VPluginConfigurator {
-
+public class NeurolucidaUtilityPluginConfigurator extends VPluginConfigurator {
 	private File templateProjectSrc;
 	private final String templateProjectName = "neurolucida_template.vrlp";
-	private final String templateDataName = "template.xml";
+	private final String templateDataName    = "template.xml";
 
-	public NeurolucidaPluginConfigurator() {
-		//specify the plugin name and version
+	/**
+	 * @brief ctor
+	 */
+	public NeurolucidaUtilityPluginConfigurator() {
+		//s pecify the plugin name and version
 		setIdentifier(new PluginIdentifier("VRL-Neurolucida-Plugin", "0.1"));
 
 		// export some packages
 		exportPackage("edu.gcsc.vrl.neurolucida");
 
 		// describe the plugin
-		setDescription("Neurolucida tools for setting up simulations within ug");
+		setDescription("Utility to convert Neurolucida (XML) to ug4 files (UGX/OBJ)");
 
 		// get the license text
 		String license_str = "";
@@ -69,15 +71,11 @@ public class NeurolucidaPluginConfigurator extends VPluginConfigurator {
 		// register plugin with canvas
 		if (api instanceof VPluginAPI) {
 			VPluginAPI vapi = (VPluginAPI) api;
-			vapi.addComponent(NeurolucidaConverter.class);
+			vapi.addComponent(NeurolucidaUtility.class);
 		}
 	}
 
 	@Override
-	/**
-	 * @brief install plugins
-	 * @param iApi
-	 */
 	public void install(InitPluginAPI iApi) {
 		new File(iApi.getResourceFolder(), templateProjectName).delete();
 	}
@@ -89,22 +87,17 @@ public class NeurolucidaPluginConfigurator extends VPluginConfigurator {
 
 	@Override
 	public void init(InitPluginAPI iApi) {
-		CompletionUtil.registerClassesFromJar(
-			VJarUtil.getClassLocation(NeurolucidaPluginConfigurator.class));
+		CompletionUtil.registerClassesFromJar(VJarUtil.getClassLocation(NeurolucidaUtilityPluginConfigurator.class));
 
 		initTemplateProject(iApi);
 		initTemplateData(iApi);
 	}
 
-	/**
-	 * @brief init template data
-	 * @param iAPI
-	 */
 	private void initTemplateData(InitPluginAPI iAPI) {
 		final File templateData = new File(iAPI.getResourceFolder(), templateDataName);
 		if (!templateData.exists()) {
 			try {
-				InputStream in = NeurolucidaPluginConfigurator.class.getResourceAsStream(
+				InputStream in = NeurolucidaUtilityPluginConfigurator.class.getResourceAsStream(
 					File.separator + getClass().getPackage().getName().replace(".", File.separator) + File.separator + templateDataName);
 				IOUtil.saveStreamToFile(in, templateData);
 			} catch (FileNotFoundException ex) {
@@ -117,10 +110,6 @@ public class NeurolucidaPluginConfigurator extends VPluginConfigurator {
 		}
 	}
 
-	/**
-	 * @brief inits the template projects
-	 * @param iApi
-	 */
 	private void initTemplateProject(InitPluginAPI iApi) {
 		System.err.println(getClass().getPackage());
 		templateProjectSrc = new File(iApi.getResourceFolder(), templateProjectName);
@@ -153,12 +142,9 @@ public class NeurolucidaPluginConfigurator extends VPluginConfigurator {
 		});
 	}
 
-	/**
-	 * @brief saves the project templates
-	 */
 	private void saveProjectTemplate() {
 		try {
-			InputStream in = NeurolucidaPluginConfigurator.class.getResourceAsStream(
+			InputStream in = NeurolucidaUtilityPluginConfigurator.class.getResourceAsStream(
 				File.separator + getClass().getPackage().getName().replace(".", File.separator) + File.separator + templateProjectName);
 			IOUtil.saveStreamToFile(in, templateProjectSrc);
 		} catch (FileNotFoundException ex) {

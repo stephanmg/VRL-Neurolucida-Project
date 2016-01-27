@@ -12,17 +12,16 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 /**
- * @brief NeuroLucidaConverter component
+ * @brief Neurolucida geometry (XML) to ug4 (UGX/OBJ) converter
  * @author stephanmg <stephan@syntaktischer-zucker.de>
  */
-@ComponentInfo(name = "NeurolucidaConverter", category = "/UG4/VRL-Plugins/Neuro/Neurolucida/")
-public class NeurolucidaConverter implements Serializable {
-	/// serial ID
+@ComponentInfo(name = "NeurolucidaUtility", category = "/UG4/VRL-Plugins/Neuro/Neurolucida/")
+public class NeurolucidaUtility implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	/**
 	 * @brief converts a given Neurolucida XML file to the corresponding UGX and OBJ files
-	 * @param folder location of the Neurolucida files subject to conversion
+	 * @param folder location of the NeurolucidaUtility files subject to conversion
 	 * @param separator for formatting of subset names (default: non)
 	 * @param rescale utilized to re-scale geometry to appropriate dimensions (default: 1.0e-6)
 	 * @param cleanSubsets utilized to support VRL-Studio compatible subset names (default: true)
@@ -82,8 +81,8 @@ public class NeurolucidaConverter implements Serializable {
 			converter.set_VRLOutputNames(cleanSubsets);
 			converter.set_scaling(rescale);
 			converter.set_separator(separator);
-			/// converter.set_ugx_output(ugx);
-			/// converter.set_obj_output(obj);
+			converter.set_ugx_output(ugx);
+			converter.set_obj_output(obj);
 			converter.convert(f.getAbsoluteFile().toString());
 		}
 	}
