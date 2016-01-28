@@ -36,7 +36,7 @@ public class NeurolucidaUtilityPluginConfigurator extends VPluginConfigurator {
 	 * @brief ctor
 	 */
 	public NeurolucidaUtilityPluginConfigurator() {
-		//s pecify the plugin name and version
+		// pecify the plugin name and version
 		setIdentifier(new PluginIdentifier("VRL-Neurolucida-Plugin", "0.1"));
 
 		// export some packages
@@ -57,8 +57,8 @@ public class NeurolucidaUtilityPluginConfigurator extends VPluginConfigurator {
 
 		// copyright info
 		setCopyrightInfo("VRL-Neurolucida-Plugin",
-			"(c) stephanmg",
-			"www.syntaktischer-zucker.de", "LGPLv3", license_str);
+			"(c) stephanmg (stephan@syntaktischer-zucker.de",
+			"https://neurobox.eu", "LGPLv3", license_str);
 
 		// specify dependencies
 		addDependency(new PluginDependency("VRL", "0.4.1", "0.4.3"));
