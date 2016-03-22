@@ -24,10 +24,11 @@ import java.util.logging.Logger;
 import org.apache.commons.io.IOUtils;
 
 /**
- * @brief Plugin configurator of Neurolucida Utility 
+ * @brief plugin configurator for the Neurolucida conversion utility
  * @author stephanmg <stephan@syntaktischer-zucker.de>
  */
-public class NeurolucidaUtilityPluginConfigurator extends VPluginConfigurator {
+public class NeurolucidaPluginConfigurator extends VPluginConfigurator {
+	/// tmeplate files
 	private File templateProjectSrc;
 	private final String templateProjectName = "neurolucida_template.vrlp";
 	private final String templateDataName    = "template.xml";
@@ -35,7 +36,7 @@ public class NeurolucidaUtilityPluginConfigurator extends VPluginConfigurator {
 	/**
 	 * @brief ctor
 	 */
-	public NeurolucidaUtilityPluginConfigurator() {
+	public NeurolucidaPluginConfigurator() {
 		// pecify the plugin name and version
 		setIdentifier(new PluginIdentifier("VRL-Neurolucida-Plugin", "0.1"));
 
@@ -82,12 +83,12 @@ public class NeurolucidaUtilityPluginConfigurator extends VPluginConfigurator {
 
 	@Override
 	public void unregister(PluginAPI api) {
-		// nothing to unregister
+		/// nothing to unregister
 	}
 
 	@Override
 	public void init(InitPluginAPI iApi) {
-		CompletionUtil.registerClassesFromJar(VJarUtil.getClassLocation(NeurolucidaUtilityPluginConfigurator.class));
+		CompletionUtil.registerClassesFromJar(VJarUtil.getClassLocation(NeurolucidaPluginConfigurator.class));
 
 		initTemplateProject(iApi);
 		initTemplateData(iApi);
@@ -97,7 +98,7 @@ public class NeurolucidaUtilityPluginConfigurator extends VPluginConfigurator {
 		final File templateData = new File(iAPI.getResourceFolder(), templateDataName);
 		if (!templateData.exists()) {
 			try {
-				InputStream in = NeurolucidaUtilityPluginConfigurator.class.getResourceAsStream(
+				InputStream in = NeurolucidaPluginConfigurator.class.getResourceAsStream(
 					File.separator + getClass().getPackage().getName().replace(".", File.separator) + File.separator + templateDataName);
 				IOUtil.saveStreamToFile(in, templateData);
 			} catch (FileNotFoundException ex) {
@@ -144,7 +145,7 @@ public class NeurolucidaUtilityPluginConfigurator extends VPluginConfigurator {
 
 	private void saveProjectTemplate() {
 		try {
-			InputStream in = NeurolucidaUtilityPluginConfigurator.class.getResourceAsStream(
+			InputStream in = NeurolucidaPluginConfigurator.class.getResourceAsStream(
 				File.separator + getClass().getPackage().getName().replace(".", File.separator) + File.separator + templateProjectName);
 			IOUtil.saveStreamToFile(in, templateProjectSrc);
 		} catch (FileNotFoundException ex) {
