@@ -31,7 +31,7 @@ public final class NeurolucidaUtility implements Serializable {
 	 * @param obj output OBJ (default: false)
 	 */
     	@MethodInfo(name="convert file", valueName="Convert a file", hide=false)
-	public void convert_file(
+	public void convertFile(
 		/// FILE
 		@ParamInfo(
 			name = "Input file",
@@ -83,7 +83,7 @@ public final class NeurolucidaUtility implements Serializable {
 	 * @param obj output OBJ (default: false)
 	 */
     	@MethodInfo(name="convert folder", valueName="Convert a folder", hide=true)
-	public void convert_folder(
+	public void convertFolder(
 		/// FOLDER
 		@ParamInfo(
 			name = "Input file folder",
